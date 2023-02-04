@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Personal Details Form</title>
+    <style>
+      form {
+        width: 500px;
+        margin: 50px auto;
+        text-align: center;
+      }
+      
+      label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 0px;
+      }
+      
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"] {
+        width: 50%;
+        padding: 10px;
+        margin-bottom: 0px;
+        font-size: 16px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        border: 1px solid gray;
+      }
+      
+      button[type="submit"] {
+        /*width: 50%;*/
+        /*padding: 10px;*/
+        /*font-size: 18px;*/
+        /*background-color: blue;*/
+        /*color: white;*/
+        /*border: none;*/
+        /*border-radius: 5px;*/
+        /*cursor: pointer;*/
+        width: 50%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name"><br><br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email"><br><br>
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone"><br><br>
+      <button type="submit" id="submitBtn">Submit</button>
+    </form>
+    
+    <script>
+      document.getElementById("submitBtn").addEventListener("click", function(event) {
+        event.preventDefault();
+        
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let phone = document.getElementById("phone").value;
+        
+        if (!name || !email || !phone) {
+          alert("All fields are required!");
+          return;
+        }
+        
+        let personalDetails = { name, email, phone };
+        
+        // Store the personal details object in local storage
+        localStorage.setItem("personalDetails", JSON.stringify(personalDetails));
+        
+        alert("Personal details submitted successfully!");
+      });
+      function (event){
+        window.parent.postMessage(
+            JSON.stringify({
+              event_code: "ym-client-event",
+              data: JSON.stringify({
+                event: {
+                  code: "personalDetails",
+                  data: {
+                    PersonalDetails: personalDetails,
+                  },
+                },
+              }),
+            }),
+            "*"
+          );
+   
+         // alert(`${ratingValue} saved`);
+    }
+    </script>
+  </body>
+</html>
