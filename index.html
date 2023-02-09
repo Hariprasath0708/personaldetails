@@ -27,24 +27,19 @@
         border: 1px solid gray;
       }
       
-      button[type="submit"] {
-        /*width: 50%;*/
-        /*padding: 10px;*/
-        /*font-size: 18px;*/
-        /*background-color: blue;*/
-        /*color: white;*/
-        /*border: none;*/
-        /*border-radius: 5px;*/
-        /*cursor: pointer;*/
-        width: 50%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px 20px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 100px;
-    cursor: pointer;
-      }
+      input[type="submit"] {
+      width: 50%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #3e8e41;
+    }
     </style>
   </head>
   <body>
@@ -55,47 +50,41 @@
       <input type="email" id="email" name="email"><br><br>
       <label for="phone">Phone:</label>
       <input type="tel" id="phone" name="phone"><br><br>
-      <button type="submit" id="submitBtn">Submit</button>
+      <input type="submit" value="Submit" onclick="storepersonalDetails()">
     </form>
     
     <script>
-      document.getElementById("submitBtn").addEventListener("click", function(event) {
-        event.preventDefault();
-        
-        let name = document.getElementById("name").value;
-        let email = document.getElementById("email").value;
-        let phone = document.getElementById("phone").value;
-        
-        if (!name || !email || !phone) {
-          alert("All fields are required!");
-          return;
-        }
-        
-        let personalDetails = { name, email, phone };
-        
-        // Store the personal details object in local storage
-        localStorage.setItem("personalDetails", JSON.stringify(personalDetails));
-        
-        alert("Personal details submitted successfully!");
-      });
-      function (event){
-        window.parent.postMessage(
-            JSON.stringify({
-              event_code: "ym-client-event",
-              data: JSON.stringify({
-                event: {
-                  code: "personalDetails",
-                  data: {
-                    PersonalDetails: personalDetails,
-                  },
-                },
-              }),
-            }),
-            "*"
-          );
-   
-         // alert(`${ratingValue} saved`);
-    }
+      function storepersonalDetails() {
+     console.log("CheckCheck")
+      /* Get the values from the form inputs */
+      var name = document.getElementById("name").value;
+     console.log(name)
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+     // var BankBranch = document.getElementById("Bank Branch").value;
+      console.log(name);
+     console.log(email)
+     console.log(phone)
+     //console.log(BankBranch)
+      /* Store the values in an object */
+      var accountDetails = {
+        name: name,
+        email: email,
+        phone: phone,
+
+      };
+     var a =name + '/'+email +'/' +phone;
+      console.log(a)
+      /* Log the account details to the console for now */
+      
+window.parent.postMessage(
+       JSON.stringify({
+                    event_code: "ym-client-event",
+                    data: a
+               }),
+                "*"
+           );    }
+    
     </script>
   </body>
 </html>
