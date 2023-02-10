@@ -50,6 +50,8 @@
       <input type="email" id="email" name="email"><br><br>
       <label for="phone">Phone:</label>
       <input type="tel" id="phone" name="phone"><br><br>
+      <label for="policy-number">Policy Number:</label> 
+      <input type="text" id="policy-number" name="policy-number" required> 
       <input type="submit" value="Submit" onclick="storepersonalDetails()">
     </form>
     
@@ -61,19 +63,21 @@
      console.log(name)
       var email = document.getElementById("email").value;
       var phone = document.getElementById("phone").value;
+        var policynumber =document.getElementById("policynumber").value;
      // var BankBranch = document.getElementById("Bank Branch").value;
       console.log(name);
      console.log(email)
      console.log(phone)
-     //console.log(BankBranch)
+     console.log(policynumber)
       /* Store the values in an object */
       var accountDetails = {
         name: name,
         email: email,
         phone: phone,
+         policynumber:policynumber
 
       };
-     var a =name + '/'+email +'/' +phone;
+     var a =name + '/'+email +'/' +phone+'/'+policynumber;
       console.log(a)
       /* Log the account details to the console for now */
       
